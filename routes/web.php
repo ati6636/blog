@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [Homepage::class,'index'])->name('homepage');
 
+Route::get('/iletisim',[Homepage::class, 'contact'])->name('contact');
+
+Route::post('/iletisim',[Homepage::class, 'contactpost'])->name('contact.post');
+
 Route::get('sayfa', [Homepage::class,'index']);
 
 Route::get('/kategori/{slug}', [Homepage::class, 'category'])->name('category');
