@@ -23,9 +23,17 @@ Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function(){
 
   Route::get('panel',[Dashboard::class, 'index'])->name('dashboard');
 
+  Route::get('/makaleler/silinenler', [ArticleController::class, 'trashed'])->name('trashed.article');
+
   Route::resource('makaleler', ArticleController::class);
 
   Route::get('/switch', [ArticleController::class, 'switch'])->name('switch');
+
+  Route::get('/deletearticle/{id}', [ArticleController::class, 'delete'])->name('delete.article');
+
+  Route::get('/hardeletearticle/{id}', [ArticleController::class, 'hardDelete'])->name('hard.delete.article');
+
+  Route::get('/recoveryarticle/{id}', [ArticleController::class, 'recovery'])->name('recovery.article');
 
   Route::get('cikis', [AuthController::class,'logout'])->name('logout');
 });
