@@ -37,8 +37,10 @@ Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function(){
   |--------------------------------------------------------------------------
   */
   Route::get('kategoriler',[CategoryController::class, 'index'])->name('category.index');
-  Route::get('kategori/status',[CategoryController::class, 'switch'])->name('category.switch');
-  Route::post('kategori/create',[CategoryController::class, 'create'])->name('category.create');
+  Route::get('/kategori/status',[CategoryController::class, 'switch'])->name('category.switch');
+  Route::post('/kategoriler/create',[CategoryController::class, 'create'])->name('category.create');
+  Route::post('/kategoriler/update',[CategoryController::class, 'update'])->name('category.update');
+  Route::get('/kategori/getData',[CategoryController::class, 'getData'])->name('category.getdata');
 
   Route::get('cikis', [AuthController::class,'logout'])->name('logout');
 });

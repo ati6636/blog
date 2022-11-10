@@ -28,10 +28,31 @@ class CategoryController extends Controller
       return redirect()->back();
     }
 
+
+      public function update(Request $request){
+        $isSlug = Category::whereSlug(Str::slug($request->slug))->whereNotIn('id',[$request->id])->first();
+        $isName = Category::whereName($request->category)->whereNotIn('id',[$request->id])->first();
+        if($isSlug or $isName){
+          toastr()->error($request->category.' Adında Bir Kategori Bulunmaktadır:', 'HATA!');
+          return redirect()->back();
+        }
+        $category = Category::find($request->id);
+        $category->name = $request->category;
+        $category->slug = Str::slug($request->slug);
+        $category->save();
+        toastr()->success('Başarılı Şekilde Güncellendi.','Kategori');
+        return redirect()->back();
+      }
+
+    public function getData(Request $request){
+      $category = Category::findOrFail($request->id);
+      return \Response::json($category);
+
+    }
+
     public function switch(Request $request){
       $category = Category::findOrFail($request->id);
       $category->status = $request->statu=="true" ? 1 : 0 ;
       $category->save();
     }
-
 }
