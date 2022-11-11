@@ -151,7 +151,7 @@
                 $('#articleAlert').html(name+' Kategorisi Sabit Bir Kategoridir. Silinen Diğer Makaleler Bu Kategoriye Eklenecektir.');
                 $('#body').show();
                 $('#deleteButton').hide();
-                $('#deleteModal').modal();
+                window.$('#deleteModal').modal();
                 return;
             }
             $('#deleteId').val(id);
@@ -162,7 +162,7 @@
                 $('#articleAlert').html('Bu Kategoriye Ait ' + count + ' Makale Bulunmaktadır. Silmek İstediğinize Emin misiniz?');
                 $('#body').show();
             }
-            $('#deleteModal').modal();
+            window.$('#deleteModal').modal();
         });
 
         $('.edit-click').click(function() {
@@ -176,7 +176,7 @@
                     $('#category').val(data.name);
                     $('#slug').val(data.slug);
                     $('#category_id').val(data.id);
-                    $('#editModal').modal();
+                    window.$('#editModal').modal();
                 }
             });
         });

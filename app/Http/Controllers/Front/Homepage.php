@@ -12,6 +12,7 @@ use App\Models\Page;
 use App\Models\Contact;
 use Facade\FlareClient\View;
 use Validator;
+use Mail;
 
 class Homepage extends Controller
 {
@@ -64,12 +65,23 @@ class Homepage extends Controller
         return redirect()->route('contact')->withErrors($validate)->withInput();
       }
 
-      $contact = new Contact;
+      Mail::send([],[],function($message) use($request){
+        $message->from('iletisim@mfcopy.com','MfpCopy');
+        $message->to('sedatislek66@gmail.com');
+        $message->setBody('Mesajı Gönderen :'.$request->name.'<br />
+                  Mesajı Gönderen Mail : '.$request->email.'<br />
+                  Mesaj Konusu         :  '.$request->topic.'<br />
+                  Mesaj : '.$request->message.'<br /><br />
+                  Mesaj Gönderilme Tarihi : '.now().'','text/html');
+        $message->subject($request->name. ' İletişimden mesaj gönderildi.');
+      });
+
+      /*$contact = new Contact;
       $contact->name=$request->name;
       $contact->email=$request->email;
       $contact->topic=$request->topic;
       $contact->message=$request->message;
-      $contact->save();
+      $contact->save();*/
       return redirect()->route('contact')->with('success','Mesajınız Bize İletildi. Teşekkür Ederiz.');
     }
 
