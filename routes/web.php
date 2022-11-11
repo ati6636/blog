@@ -22,7 +22,7 @@ Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function(){
   Route::get('panel',[Dashboard::class, 'index'])->name('dashboard');
   /*
   |--------------------------------------------------------------------------
-  Makale Route
+  Makaleler Route
   |--------------------------------------------------------------------------
   */
   Route::get('/makaleler/silinenler', [ArticleController::class, 'trashed'])->name('trashed.article');
@@ -33,13 +33,14 @@ Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function(){
   Route::get('/recoveryarticle/{id}', [ArticleController::class, 'recovery'])->name('recovery.article');
   /*
   |--------------------------------------------------------------------------
-  Makale Route
+  Kategoriler Route
   |--------------------------------------------------------------------------
   */
   Route::get('kategoriler',[CategoryController::class, 'index'])->name('category.index');
   Route::get('/kategori/status',[CategoryController::class, 'switch'])->name('category.switch');
   Route::post('/kategoriler/create',[CategoryController::class, 'create'])->name('category.create');
   Route::post('/kategoriler/update',[CategoryController::class, 'update'])->name('category.update');
+  Route::post('/kategoriler/delete',[CategoryController::class, 'delete'])->name('category.delete');
   Route::get('/kategori/getData',[CategoryController::class, 'getData'])->name('category.getdata');
 
   Route::get('cikis', [AuthController::class,'logout'])->name('logout');

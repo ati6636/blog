@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Back;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Article;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
@@ -33,7 +34,7 @@ class CategoryController extends Controller
         $isSlug = Category::whereSlug(Str::slug($request->slug))->whereNotIn('id',[$request->id])->first();
         $isName = Category::whereName($request->category)->whereNotIn('id',[$request->id])->first();
         if($isSlug or $isName){
-          toastr()->error($request->category.' Adında Bir Kategori Bulunmaktadır:', 'HATA!');
+          toastr()->error($request->category.' Adında Bir Kategori Bulunmaktadır.', 'HATA!');
           return redirect()->back();
         }
         $category = Category::find($request->id);
@@ -41,6 +42,24 @@ class CategoryController extends Controller
         $category->slug = Str::slug($request->slug);
         $category->save();
         toastr()->success('Başarılı Şekilde Güncellendi.','Kategori');
+        return redirect()->back();
+      }
+
+      public function delete(Request $request){
+        $category = Category::findOrFail($request->id);
+        if($category->id==1){
+          toastr()->error($request->category.' Bu Kategori Silinemez', 'HATA!');
+          return redirect()->back();
+        }
+        $message='';
+        $count = $category->articleCount();
+        if($count>0){
+          Article::where('category_id',$category->id)->update(['category_id' => 1]);
+          $defaultCategory = Category::find(1);
+          $message = 'Bu Kategoriye Ait '.$count.' makale '.$defaultCategory->name.' Kategorisine Taşındı.';
+        }
+        $category->delete();
+        toastr()->success('Başarılı Şekilde Silindi.'.$message,'Kategori');
         return redirect()->back();
       }
 
