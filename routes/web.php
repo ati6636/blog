@@ -6,6 +6,7 @@ use App\Http\Controllers\Back\ArticleController;
 use App\Http\Controllers\Back\CategoryController;
 use App\Http\Controllers\Back\PageController;
 use App\Http\Controllers\Back\AuthController;
+use App\Http\Controllers\Back\ConfigController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,6 +57,13 @@ Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function(){
   Route::get('/sayfa/delete/{id}',[PageController::class, 'delete'])->name('page.delete');
   Route::get('/sayfa/switch', [PageController::class, 'switch'])->name('page.switch');
   Route::get('/sayfa/orders', [PageController::class, 'orders'])->name('page.orders');
+  /*
+  |--------------------------------------------------------------------------
+  Page Route
+  |--------------------------------------------------------------------------
+  */
+  Route::get('/ayarlar',[ConfigController::class, 'index'])->name('config.index');
+  Route::post('/ayarlar/update',[ConfigController::class, 'update'])->name('config.update');
 
 
   Route::get('cikis', [AuthController::class,'logout'])->name('logout');
@@ -67,6 +75,9 @@ Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function(){
 |--------------------------------------------------------------------------
 |
 */
+Route::get('site-bakimda',function(){
+  return view('front.offline');
+});
 
 Route::get('/', [Homepage::class,'index'])->name('homepage');
 Route::get('/iletisim',[Homepage::class, 'contact'])->name('contact');

@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Route;
+use App\Models\Configs;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+      view()->share('config',Configs::find(1));
         Schema::defaultStringLength(191);
         Route::resourceVerbs([
           'edit' => 'guncelle',

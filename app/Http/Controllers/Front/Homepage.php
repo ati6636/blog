@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Article;
 use App\Models\Page;
 use App\Models\Contact;
+use App\Models\Configs;
 use Facade\FlareClient\View;
 use Validator;
 use Mail;
@@ -17,6 +18,9 @@ use Mail;
 class Homepage extends Controller
 {
     public function __construct(){
+      if (Configs::find(1)->active==0) {
+        return redirect()->to('site-bakimda')->send();
+      }
       view()->share('pages',Page::orderBy('order','ASC')->get());
       view()->share('categories',Category::inRandomOrder()->get());
     }
@@ -65,6 +69,7 @@ class Homepage extends Controller
         return redirect()->route('contact')->withErrors($validate)->withInput();
       }
 
+      //Mail Gönderme İşlemleri İçin Kullanılan Kod Sistemi
       Mail::send([],[],function($message) use($request){
         $message->from('iletisim@mfcopy.com','MfpCopy');
         $message->to('sedatislek66@gmail.com');
