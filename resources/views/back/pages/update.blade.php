@@ -1,6 +1,6 @@
 @extends('back.layout.master')
 
-@section('title',$article->title . ' Makalesini Güncelle')
+@section('title',$page->title . ' Sayfasını Güncelle')
 
 @section('content')
 
@@ -17,34 +17,22 @@
           @endforeach
         </div>
       @endif
-        <form action="{{route('admin.makaleler.update',$article->id)}}" method="post" enctype="multipart/form-data">
-          @method('PUT')
+        <form action="{{route('admin.page.edit.post',$page->id)}}" method="post" enctype="multipart/form-data">
           @csrf
             <div class="form-group">
-                <label for="">Makale Başlığı</label>
-                <input type="text" name="title" class="form-control" value="{{$article->title}}" required>
+                <label for="">Sayfa Başlığı</label>
+                <input type="text" name="title" class="form-control" value="{{$page->title}}" required>
             </div>
             <div class="form-group">
-                <label for="">Makale Kategori</label>
-                <select name="category" class="form-control" required>
-                    <option value="">Seçim Yapınız</option>
-                    @foreach ($categories as $category)
-                    <option @if ($article->category_id==$category->id) selected @endif value="{{$category->id}}">
-                      {{$category->name}}
-                    </option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="">Makale Fotoğrafı</label><br>
-                <img class="img-fluid img-thumbnail rounded mb-2" width="300" src="{{asset($article->image)}}" alt="Responsive image">
+                <label for="">Sayfa Fotoğrafı</label><br>
+                <img class="img-fluid img-thumbnail rounded mb-2" width="300" src="{{asset($page->image)}}" alt="Responsive image">
                 <input type="file" name="image" class="form-control">
             </div>
             <div class="form-group">
-                <label for="">Makale İçeriği</label>
-                <textarea name="content" id="editor" class="form-control" rows="8" >{!! $article->content !!}</textarea>
+                <label for="">Sayfa İçeriği</label>
+                <textarea name="content" id="editor" class="form-control" rows="8" >{!! $page->content !!}</textarea>
             </div>
-                <button type="submit" class="btn btn-primary btn-block" >Makale'yi Güncelle</button>
+                <button type="submit" class="btn btn-primary btn-block" >Sayfayı Güncelle</button>
         </form>
     </div>
 </div>

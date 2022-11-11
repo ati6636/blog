@@ -1,6 +1,6 @@
 @extends('back.layout.master')
 
-@section('title','Makale Oluştur')
+@section('title','Sayfa Oluştur')
 
 @section('content')
 
@@ -17,30 +17,21 @@
           @endforeach
         </div>
       @endif
-        <form action="{{route('admin.makaleler.store')}}" method="post" enctype="multipart/form-data">
+        <form action="{{route('admin.page.create.post')}}" method="post" enctype="multipart/form-data">
           @csrf
             <div class="form-group">
-                <label for="">Makale Başlığı</label>
+                <label for="">Sayfa Başlığı</label>
                 <input type="text" name="title" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="">Makale Kategori</label>
-                <select name="category" class="form-control" required>
-                    <option value="">Seçim Yapınız</option>
-                    @foreach ($categories as $category)
-                    <option value="{{$category->id}}">{{$category->name}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="">Makale Fotoğrafı</label>
+                <label for="">Sayfa Fotoğrafı</label>
                 <input type="file" name="image" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="">Makale İçeriği</label>
+                <label for="">Sayfa İçeriği</label>
                 <textarea name="content" id="editor" class="form-control" rows="8"></textarea>
             </div>
-                <button type="submit" class="btn btn-primary btn-block" >Makale'yi Oluştur</button>
+                <button type="submit" class="btn btn-primary btn-block" >Sayfayı Oluştur</button>
         </form>
     </div>
 </div>

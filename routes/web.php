@@ -45,12 +45,16 @@ Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function(){
   Route::get('/kategori/getData',[CategoryController::class, 'getData'])->name('category.getdata');
   /*
   |--------------------------------------------------------------------------
-  Kategoriler Route
+  Page Route
   |--------------------------------------------------------------------------
   */
   Route::get('/sayfalar',[PageController::class, 'index'])->name('page.index');
-  Route::get('/sayfa/switch', [PageController::class, 'switch'])->name('page.switch');
   Route::get('/sayfa/create',[PageController::class, 'create'])->name('page.create');
+  Route::post('/sayfa/create',[PageController::class, 'post'])->name('page.create.post');
+  Route::get('/sayfa/update/{id}',[PageController::class, 'update'])->name('page.edit');
+  Route::post('/sayfa/update/{id}',[PageController::class, 'updatePost'])->name('page.edit.post');
+  Route::get('/sayfa/delete/{id}',[PageController::class, 'delete'])->name('page.delete');
+  Route::get('/sayfa/switch', [PageController::class, 'switch'])->name('page.switch');
 
 
   Route::get('cikis', [AuthController::class,'logout'])->name('logout');

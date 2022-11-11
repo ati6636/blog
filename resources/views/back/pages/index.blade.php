@@ -35,7 +35,8 @@
                           </td>
                           <td>
                             <a target="_blank" href="{{route('page',$page->slug)}}" title="Görüntüle" class="btn btn-md btn-success"><i class="fa fa-eye"></i></a>
-                            <a href="{{route('admin.makaleler.edit',$page->id)}}" title="Düzenle" class="btn btn-md btn-primary"><i class="fa fa-pen"></i></a>
+                            <a href="{{route('admin.page.edit',$page->id)}}" title="Düzenle" class="btn btn-md btn-primary"><i class="fa fa-pen"></i></a>
+                            <a href="{{route('admin.page.delete',$page->id)}}" title="Sil" class="btn btn-md btn-danger"><i class="fa fa-trash"></i></a>
                           </td>
                       </tr>
                     @endforeach
