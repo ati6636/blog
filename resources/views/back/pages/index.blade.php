@@ -1,6 +1,6 @@
 @extends('back.layout.master')
 
-@section('title','Tüm Makaleler')
+@section('title','Tüm Sayfalar')
 
 @section('content')
 
@@ -9,8 +9,7 @@
       <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary float-left"><span>@yield('title')</span></h6>
         <h6 class="m-0 font-weight-bold text-primary float-right">
-          <span>{{$articles->count()}}</span> Makale Bulundu.
-          <a href="{{route('admin.trashed.article')}}" class="btn btn-outline-danger btn-sm">
+          <span>{{$pages->count()}}</span> Sayfa Bulundu.
             <i class="fa fa-trash"> Silinen Makaleler</i>
           </a>
         </h6>
@@ -22,28 +21,21 @@
                       <tr>
                           <th>Fotoğraf</th>
                           <th>Makale Başlığı</th>
-                          <th>Kategori</th>
-                          <th>Hit</th>
-                          <th>Oluşturma Tarihi</th>
                           <th>Durum</th>
                           <th>İşlemler</th>
                       </tr>
                   </thead>
                   <tbody>
-                    @foreach ($articles as $article)
+                    @foreach ($pages as $page)
                       <tr>
-                          <td><img src="{{$article->image}}" width='200'></td>
-                          <td>{{$article->title}}</td>
-                          <td>{{$article->getCategory->name}}</td>
-                          <td>{{$article->hit}}</td>
-                          <td>{{$article->created_at->diffForHumans()}}</td>
+                          <td><img src="{{$page->image}}" width='200'></td>
+                          <td>{{$page->title}}</td>
                           <td>
-                            <input class="switch" article-id="{{$article->id}}" type="checkbox" data-toggle="toggle" data-on="Aktif" data-off="Pasif" @if($article->status==1) checked @endif data-onstyle="success" data-offstyle="danger">
+                            <input class="switch" page-id="{{$page->id}}" type="checkbox"  data-toggle="toggle" data-on="Aktif" data-off="Pasif" @if($page->status==1) checked @endif data-onstyle="success" data-offstyle="danger">
                           </td>
                           <td>
-                            <a target="_blank" href="{{route('single',[$article->getCategory->slug,$article->slug])}}" title="Görüntüle" class="btn btn-md btn-success"><i class="fa fa-eye"></i></a>
-                            <a href="{{route('admin.makaleler.edit',$article->id)}}" title="Düzenle" class="btn btn-md btn-primary"><i class="fa fa-pen"></i></a>
-                            <a href="{{route('admin.delete.article',$article->id)}}" title="Sil" class="btn btn-md btn-danger"><i class="fa fa-trash"></i></a>
+                            <a target="_blank" href="{{route('page',$page->slug)}}" title="Görüntüle" class="btn btn-md btn-success"><i class="fa fa-eye"></i></a>
+                            <a href="{{route('admin.makaleler.edit',$page->id)}}" title="Düzenle" class="btn btn-md btn-primary"><i class="fa fa-pen"></i></a>
                           </td>
                       </tr>
                     @endforeach
@@ -66,11 +58,9 @@
 <script>
     $(function () {
         $('.switch').change(function () {
-            id = $(this)[0].getAttribute('article-id');
+            id = $(this)[0].getAttribute('page-id');
             statu=$(this).prop('checked');
-            $.get("{{route('admin.switch')}}", {id:id,statu:statu} , function(data, status){
-                console.log(data);
-  });
+            $.get("{{route('admin.page.switch')}}", {id:id,statu:statu} , function(data, status){});
         })
     })
 </script>

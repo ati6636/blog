@@ -48,7 +48,7 @@
                                 <td>{{$category->name}}</td>
                                 <td>{{$category->articleCount()}}</td>
                                 <td>
-                                    <input class="switch" category-id="{{$category->id}}" type="checkbox" checked data-toggle="toggle" data-on="Aktif" data-off="Pasif" @if($category->status==1) checked
+                                    <input class="switch" category-id="{{$category->id}}" type="checkbox" data-toggle="toggle" data-on="Aktif" data-off="Pasif" @if($category->status==1) checked
                                     @endif data-onstyle="success" data-offstyle="danger">
                                 </td>
                                 <td>

@@ -1,6 +1,6 @@
 @extends('back.layout.master')
 
-@section('title','Tüm Makaleler')
+@section('title','Silinen Makaleler')
 
 @section('content')
 
@@ -9,9 +9,9 @@
       <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary float-left"><span>@yield('title')</span></h6>
         <h6 class="m-0 font-weight-bold text-primary float-right">
-          <span>{{$articles->count()}}</span> Makale Bulundu.
-          <a href="{{route('admin.trashed.article')}}" class="btn btn-outline-danger btn-sm">
-            <i class="fa fa-trash"> Silinen Makaleler</i>
+          <span>{{$articles->count()}}</span> Silinmiş Makale Bulundu.
+          <a href="{{route('admin.makaleler.index')}}" class="btn btn-outline-info btn-sm">
+            <i class="fa fa-chevron-left"> Makalelere Dön</i>
           </a>
         </h6>
       </div>
@@ -25,7 +25,6 @@
                           <th>Kategori</th>
                           <th>Hit</th>
                           <th>Oluşturma Tarihi</th>
-                          <th>Durum</th>
                           <th>İşlemler</th>
                       </tr>
                   </thead>
@@ -38,12 +37,8 @@
                           <td>{{$article->hit}}</td>
                           <td>{{$article->created_at->diffForHumans()}}</td>
                           <td>
-                            <input class="switch" article-id="{{$article->id}}" type="checkbox" data-toggle="toggle" data-on="Aktif" data-off="Pasif" @if($article->status==1) checked @endif data-onstyle="success" data-offstyle="danger">
-                          </td>
-                          <td>
-                            <a target="_blank" href="{{route('single',[$article->getCategory->slug,$article->slug])}}" title="Görüntüle" class="btn btn-md btn-success"><i class="fa fa-eye"></i></a>
-                            <a href="{{route('admin.makaleler.edit',$article->id)}}" title="Düzenle" class="btn btn-md btn-primary"><i class="fa fa-pen"></i></a>
-                            <a href="{{route('admin.delete.article',$article->id)}}" title="Sil" class="btn btn-md btn-danger"><i class="fa fa-trash"></i></a>
+                            <a href="{{route('admin.recovery.article',$article->id)}}" title="Kurtar" class="btn btn-md btn-primary"><i class="fa fa-recycle"></i></a>
+                            <a href="{{route('admin.hard.delete.article',$article->id)}}" title="Sil" class="btn btn-md btn-danger"><i class="fa fa-trash"></i></a>
                           </td>
                       </tr>
                     @endforeach
@@ -57,21 +52,8 @@
 
 @section('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap5-toggle@4.3.4/css/bootstrap5-toggle.min.css" rel="stylesheet">
 @endsection
 
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap5-toggle@4.3.4/js/bootstrap5-toggle.min.js"></script>
-<script>
-    $(function () {
-        $('.switch').change(function () {
-            id = $(this)[0].getAttribute('article-id');
-            statu=$(this).prop('checked');
-            $.get("{{route('admin.switch')}}", {id:id,statu:statu} , function(data, status){
-                console.log(data);
-  });
-        })
-    })
-</script>
 @endsection

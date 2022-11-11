@@ -4,6 +4,7 @@ use App\Http\Controllers\Front\Homepage;
 use App\Http\Controllers\Back\Dashboard;
 use App\Http\Controllers\Back\ArticleController;
 use App\Http\Controllers\Back\CategoryController;
+use App\Http\Controllers\Back\PageController;
 use App\Http\Controllers\Back\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,12 +37,21 @@ Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function(){
   Kategoriler Route
   |--------------------------------------------------------------------------
   */
-  Route::get('kategoriler',[CategoryController::class, 'index'])->name('category.index');
+  Route::get('/kategoriler',[CategoryController::class, 'index'])->name('category.index');
   Route::get('/kategori/status',[CategoryController::class, 'switch'])->name('category.switch');
   Route::post('/kategoriler/create',[CategoryController::class, 'create'])->name('category.create');
   Route::post('/kategoriler/update',[CategoryController::class, 'update'])->name('category.update');
   Route::post('/kategoriler/delete',[CategoryController::class, 'delete'])->name('category.delete');
   Route::get('/kategori/getData',[CategoryController::class, 'getData'])->name('category.getdata');
+  /*
+  |--------------------------------------------------------------------------
+  Kategoriler Route
+  |--------------------------------------------------------------------------
+  */
+  Route::get('/sayfalar',[PageController::class, 'index'])->name('page.index');
+  Route::get('/sayfa/switch', [PageController::class, 'switch'])->name('page.switch');
+  Route::get('/sayfa/create',[PageController::class, 'create'])->name('page.create');
+
 
   Route::get('cikis', [AuthController::class,'logout'])->name('logout');
 });

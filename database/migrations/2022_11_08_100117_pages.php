@@ -19,6 +19,7 @@ class Pages extends Migration
             $table->string('image');
             $table->longText('content');
             $table->string('slug');
+            $table->integer('status')->default(1)->comment('0:pasif 1:aktif');
             $table->integer('order');
             $table->timestamps();
         });
