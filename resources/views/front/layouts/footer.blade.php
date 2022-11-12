@@ -12,7 +12,7 @@
                       @foreach ($socials as $social)
                         @if ($config->$social!=null)
                           <li class="list-inline-item">
-                              <a href="{{$config->$social}}" target="_blank">
+                              <a target="_blank" href="{{$config->$social}}">
                                   <span class="fa-stack fa-lg">
                                       <i class="fas fa-circle fa-stack-2x"></i>
                                       <i class="fab fa-{{$social}} fa-stack-1x fa-inverse"></i>

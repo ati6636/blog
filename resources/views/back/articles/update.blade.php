@@ -42,7 +42,7 @@
             </div>
             <div class="form-group">
                 <label for="">Makale İçeriği</label>
-                <textarea name="content" id="editor" class="form-control" rows="8" >{!! $article->content !!}</textarea>
+                <textarea name="content" id="editor" class="ckeditor form-control" rows="8" >{!! $article->content !!}</textarea>
             </div>
                 <button type="submit" class="btn btn-primary btn-block" >Makale'yi Güncelle</button>
         </form>
@@ -52,23 +52,17 @@
 @endsection
 
 @section('css')
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 @endsection
 
 @section('js')
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
 <script>
     $(document).ready(function() {
-        $('#editor').summernote(
-          {
-            'height' : 300
-        }
-        );
+        $('.ckeditor').ckeditor();
     });
 </script>
 @endsection

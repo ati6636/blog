@@ -35,7 +35,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-body"></div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">İptal</button>
                 <a class="btn btn-primary" href="{{route('admin.logout')}}">Çıkış Yap</a>
