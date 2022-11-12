@@ -26,7 +26,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-      view()->share('config',Configs::find(1));
         Schema::defaultStringLength(191);
         Route::resourceVerbs([
           'edit' => 'guncelle',
