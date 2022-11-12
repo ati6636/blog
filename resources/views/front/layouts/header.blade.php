@@ -28,7 +28,7 @@
         <div class="container-fluid px-4 px-lg-5">
             <a class="navbar-brand" href="{{route('homepage')}}">
               @if ($config->logo!=null)
-                <img src="{{asset($config->logo)}}" width="100" alt="">
+                <img src="{{asset($config->logo)}}" width="70" alt="">
               @else
                 {{$config->title}}
               @endif
